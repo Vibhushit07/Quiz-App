@@ -6,17 +6,30 @@ import './App.css';
 
 class App extends Component {
 
-  // constructor() {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      name: null
+    }
+  }
 
-  // }
-
-  // componentDidMount() {
-
-  // }
+  setName = (name) => {
+    console.log(name);
+    this.setState({ name: name });
+  }
 
   render() {
     return(
-      <Home />
+      <div>
+        {
+          this.state.name === null ? 
+            <Home setName = { this.setName } />
+          :
+            <p> { this.state.name } </p>
+        }
+      </div>
+      
     );
   }
 }
