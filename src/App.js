@@ -8,10 +8,24 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      name: null
+      name: null,
+      data: null,
+      isLoaded: false
     }
+  }
+
+  componentDidMount() {
+    fetch("https://opentdb.com/api.php?amount=10")
+    .then(res => res.json())
+    .then(res => {
+      console.log(res);
+      this.setState({ isLoaded: true, data: res });
+    }, 
+    error => {
+      this.setState({ isLoaded: true, error })
+    });
   }
 
   setName = (name) => {
@@ -20,17 +34,33 @@ class App extends Component {
   }
 
   render() {
-    return(
-      <div>
-        {
-          this.state.name === null ? 
-            <Home setName = { this.setName } />
-          :
-            <p> { this.state.name } </p>
-        }
-      </div>
-      
-    );
+
+    if(this.state.name === null) {
+      return (
+        <Home setName = { this.setName } />
+      );
+
+    } else if (!this.state.isLoaded) {
+      return (
+        <div>
+          Loading
+        </div>
+      );
+
+    } else if (this.state.error) {
+      return (
+        <div>
+          Error: {this.state.error.message }
+        </div>
+      );
+
+    } else {
+      return(
+        <div>
+          { this.state.name }
+        </div>
+      );
+    }
   }
 }
 
