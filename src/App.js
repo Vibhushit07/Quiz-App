@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Home from './Components/Home';
 import Question from './Components/Question';
 import Footer from './Components/Footer';
+import Result from './Components/Result';
 
 import './App.css';
 
@@ -17,7 +18,8 @@ class App extends Component {
       isLoaded: false,
       index: 0,
       submitted: [ false, false, false, false, false, false, false, false, false, false ],
-      answers: [ "", "", "", "", "", "", "", "", "", "" ]
+      answers: [ "", "", "", "", "", "", "", "", "", "" ],
+      testSubmitted: false
     }
   }
 
@@ -63,6 +65,10 @@ class App extends Component {
     this.setIndex(1);
   }
 
+  submitTest = () => {
+    this.setState({ testSubmitted: true });
+  }
+
   render() {
 
     if(this.state.name === null) {
@@ -84,13 +90,18 @@ class App extends Component {
         </div>
       );
 
-    } else {
+    } else if(!this.state.testSubmitted) {
       return(
         <div>
           Welcome { this.state.name }
           <Question state = { this.state } updateState = { this.updateState } />
-          <Footer setIndex = { this.setIndex } />
+          <Footer setIndex = { this.setIndex } submitTest = { this.submitTest } />
         </div>
+      );
+
+    } else {
+      return (
+        <Result state = { this.state } />
       );
     }
   }

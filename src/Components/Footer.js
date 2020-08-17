@@ -10,11 +10,16 @@ class Footer extends Component {
         this.props.setIndex(1);
     }
 
+    submitTest = () => {
+        this.props.submitTest();
+    }
+
     render() {
         return(
             <div>
                 <button onClick = { this.previous } > Previous </button>
                 <button onClick = { this.next } > Next </button>
+                <button onClick = { this.submitTest } > Submit Test </button>
             </div>
         );
     }

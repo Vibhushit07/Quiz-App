@@ -7,8 +7,6 @@ class Question extends Component {
         this.state = {
             value: ""
         }
-
-        // this.submit = this.submit.bind(this);
     }
 
     // checkQuotes = (data) => {
