@@ -12,7 +12,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      name: null,
+      name: "",
       data: null,
       isLoaded: false,
       index: 0,
@@ -54,45 +54,69 @@ class App extends Component {
     answers[this.state.index] = answer;
 
     let submitted = this.state.submitted;
-    submitted[this.state.submitted] = true;
+    submitted[this.state.index] = true;
 
     console.log(score);
 
     this.setState({ submitted: submitted, answers: answers, score: this.state.score + score });
 
-    this.setIndex(1);
+    // this.setIndex(1);
   }
 
   render() {
 
-    if(this.state.name === null) {
-      return (
-        <Home setName = { this.setName } />
-      );
+    // if(this.state.name === null) {
+    //   return (
+    //     <Home setName = { this.setName } />
+    //   );
 
-    } else if (!this.state.isLoaded) {
-      return (
-        <div>
-          Loading
-        </div>
-      );
+    // } else if (!this.state.isLoaded) {
+    //   return (
+    //     <div>
+    //       Loading
+    //     </div>
+    //   );
 
-    } else if (this.state.error) {
-      return (
-        <div>
-          Error: {this.state.error.message }
-        </div>
-      );
+    // } else if (this.state.error) {
+    //   return (
+    //     <div>
+    //       Error: {this.state.error.message }
+    //     </div>
+    //   );
 
-    } else {
-      return(
-        <div>
-          Welcome { this.state.name }
-          <Question state = { this.state } updateState = { this.updateState } />
-          <Footer setIndex = { this.setIndex } />
-        </div>
-      );
-    }
+    // } else {
+    //   return(
+    //     <div>
+    //       Welcome { this.state.name }
+    //       <Question state = { this.state } updateState = { this.updateState } />
+    //       <Footer setIndex = { this.setIndex } />
+    //     </div>
+    //   );
+    // }
+
+    return (
+      <div>
+        {
+          this.state.name === "" ?
+            <Home setName = { this.setName } />
+            :
+            this.state.data === null ?
+              <div className = "container"> Loading </div> 
+              : 
+              !this.state.testSubmitted ?
+                <div className = "container">
+                  Welcome { this.state.name }
+                  <Question state = { this.state } updateState = { this.updateState } />
+                  <Footer setIndex = { this.setIndex } testSubmitted = { this.testSubmitted } />
+                </div> 
+                :
+                <div>
+                  {/* <Result state = { this.state } /> */}
+                  Hello
+                </div>
+        }
+      </div>
+    );
   }
 }
 
