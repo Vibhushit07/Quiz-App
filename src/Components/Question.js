@@ -29,6 +29,14 @@ class Question extends Component {
         return options;
     }
 
+    submit = (results, index) => {
+        let score = 0;
+
+        if(event.target.value === results[index].correct_answer)
+            score = 1;
+        this.props.updateState(event.target.value, score);
+    }
+
     render() {
         const index = this.props.state.index;
         const results = this.props.state.data.results;
@@ -40,6 +48,7 @@ class Question extends Component {
                 <form>
                     { this.options(results, index) }
                 </form>
+                <button onClick = { this.submit(results, index) } > Submit </button>
             </div>
         );
     }
