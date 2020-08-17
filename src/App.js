@@ -13,7 +13,10 @@ class App extends Component {
     this.state = {
       name: null,
       data: null,
-      isLoaded: false
+      isLoaded: false,
+      index: 0,
+      submitted: [ false, false, false, false, false, false, false, false, false, false ],
+      answers: [ "", "", "", "", "", "", "", "", "", "" ]
     }
   }
 
@@ -32,6 +35,20 @@ class App extends Component {
   setName = (name) => {
     console.log(name);
     this.setState({ name: name });
+  }
+
+  updateState = (answer, score) => {
+
+    console.log(answer);
+    let answers = this.state.answers;
+    answers[this.state.index] = answer;
+
+    let submitted = this.state.submitted;
+    submitted[this.state.submitted] = true;
+
+    console.log(score);
+
+    this.setState({ submitted: submitted, answers: answers, score: this.state.score + score });
   }
 
   render() {
@@ -59,7 +76,7 @@ class App extends Component {
       return(
         <div>
           Welcome { this.state.name }
-          <Question />
+          <Question state = { this.state } updateState = { this.updateState } />
         </div>
       );
     }
