@@ -19,7 +19,8 @@ class Question extends Component {
 
         options.push( 
             <div key = { results[index].correct_answer } >
-                <input type = "radio" name = "options" value = { results[index].correct_answer } /> 
+                <input type = "radio" name = "options" value = { results[index].correct_answer } 
+                  defaultChecked = { results[index].correct_answer === this.props.state.answers[index]  } /> 
                     { results[index].correct_answer }
             </div>
         );
@@ -27,7 +28,8 @@ class Question extends Component {
         for(let i = 0; i < results[index].incorrect_answers.length; i++) {
             options.push( 
                 <div key = { results[index].incorrect_answers[i] } >
-                    <input type = "radio" name = "options" value = { results[index].incorrect_answers[i] } /> 
+                    <input type = "radio" name = "options" value = { results[index].incorrect_answers[i] }
+                      defaultChecked = { results[index].incorrect_answers[i] === this.props.state.answers[index] }  /> 
                         { results[index].incorrect_answers[i] }
                 </div>
             );
@@ -55,10 +57,18 @@ class Question extends Component {
         let score = 0;
         const index = this.props.state.index;
         const results = this.props.state.data.results;
+        
+        if(this.props.state.submitted[index]) {
+            alert("This question has submitted cannot be modified now");
 
-        if(this.state.value === results[index].correct_answer)
-            score = 1;
-        this.props.updateState(this.state.value, score);
+        } else if(this.state.value === "" || this.state.value === undefined){
+            alert("Did not selected any option");
+            
+        } else {
+            if(this.state.value === results[index].correct_answer)
+                score = 1;
+            this.props.updateState(this.state.value, true, score);   
+        }
     }
 
     render() {

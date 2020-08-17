@@ -19,6 +19,7 @@ class Footer extends Component {
             <div>
                 <button onClick = { this.previous } > Previous </button>
                 <button onClick = { this.next } > Next </button>
+                <br />
                 <button onClick = { this.submitTest } > Submit Test </button>
             </div>
         );
