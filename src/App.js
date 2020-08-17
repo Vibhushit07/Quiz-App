@@ -38,6 +38,15 @@ class App extends Component {
     this.setState({ name: name });
   }
 
+  setIndex = (index) => {
+    console.log(index);
+
+    if((this.state.index === 0 && index === -1) || ( this.state.index === 9 && index === 1 ) )
+      index = 0;
+
+    this.setState({ index: this.state.index + index });
+  }
+
   updateState = (answer, score) => {
 
     console.log(answer);
@@ -50,6 +59,8 @@ class App extends Component {
     console.log(score);
 
     this.setState({ submitted: submitted, answers: answers, score: this.state.score + score });
+
+    this.setIndex(1);
   }
 
   render() {
@@ -78,7 +89,7 @@ class App extends Component {
         <div>
           Welcome { this.state.name }
           <Question state = { this.state } updateState = { this.updateState } />
-          <Footer />
+          <Footer setIndex = { this.setIndex } />
         </div>
       );
     }

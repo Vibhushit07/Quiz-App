@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 
 class Question extends Component {
 
+    // checkQuotes = (data) => {
+    //     var text = data.toString().replace(/&quot;/g, "\"");
+    //     return text;
+    // }
+
     options = (results, index) => {
         let options = [];
 
@@ -30,6 +35,7 @@ class Question extends Component {
 
         return(
             <div>
+                {/* Question { index+1 } { this.checkQuotes(results[index].question) } */}
                 Question { index+1 } { results[index].question }
                 <form>
                     { this.options(results, index) }
