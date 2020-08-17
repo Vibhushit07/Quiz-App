@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 import Home from './Components/Home';
+import Question from './Components/Question';
+import Footer from './Components/Footer';
 
 import './App.css';
-import Question from './Components/Question';
 
 class App extends Component {
 
@@ -77,6 +78,7 @@ class App extends Component {
         <div>
           Welcome { this.state.name }
           <Question state = { this.state } updateState = { this.updateState } />
+          <Footer />
         </div>
       );
     }
