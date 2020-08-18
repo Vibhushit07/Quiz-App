@@ -19,6 +19,7 @@ class App extends Component {
       index: 0,
       submitted: [ false, false, false, false, false, false, false, false, false, false ],
       answers: [ "", "", "", "", "", "", "", "", "", "" ],
+      score: 0,
       testSubmitted: false
     }
   }

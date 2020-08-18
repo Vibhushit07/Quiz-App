@@ -67,7 +67,7 @@ class Question extends Component {
         } else {
             if(this.state.value === results[index].correct_answer)
                 score = 1;
-            this.props.updateState(this.state.value, true, score);   
+            this.props.updateState(this.state.value, score);   
         }
     }
 
